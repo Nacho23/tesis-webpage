@@ -1,0 +1,27 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Categoría</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let category of categoryList">
+            <th scope="row">{{category.category}}</th>
+            <th>
+                <button type="button" class="btn btn-outline btn-danger mx-1" data-toggle="tooltip" data-placement="top"
+                    title="Eliminar Categoría" (click)="deleteCategory(category.uid)">
+                    <i class="fa fa-remove fa-lg"></i>
+                </button>
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <input type="text" class="form-control" [(ngModel)]="category">
+            </th>
+            <th>
+                <button type="button" class="btn btn-outline btn-success btn-block" (click)="createCategory(category)">Agregar Nueva Categoría</button>
+            </th>
+        </tr>
+    </tbody>
+</table>

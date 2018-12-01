@@ -1,0 +1,92 @@
+<div class="row">
+    <div class="col-md-3">
+        <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openModal(modalCreateUser)">
+            <i class="fa fa-user"></i>&nbsp;Agregar Padrino(a)</button>
+    </div>
+    <div class="col-md-5">
+        <input type="file" class="form-control" (change)="handleFile($event)">
+    </div>
+    <div class="col-md-3">
+        <img src="../../../assets/img/brand/loader.gif" style="width: 30px" *ngIf="loading">
+    </div>
+</div>
+
+<!-- Tabla de Ahijads/as -->
+
+<div class="my-4">
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Nombre y Apellido</th>
+                <th>Rut</th>
+                <th>Correo Electrónico</th>
+                <th>Teléfono</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let godfather of godfatherList" (click)="goToUserDetails(godfather.id)">
+                <td>{{godfather.firstName}} {{godfather.lastName}}</td>
+                <td>{{godfather.rut}}</td>
+                <td><i class="fa fa-envelope"></i> {{godfather.email}}</td>
+                <td><i class="fa fa-phone"></i> {{godfather.phone}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<ng-template #modalCreateUser>
+    <div class="modal-header">
+        <h4 class="modal-title">Agregar Padrino(a)</h4>
+        <button type="button" class="close" (click)="modalRef.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="card-body p-4">
+                <p class="text-muted">Registrar nuevo padrino(a)</p>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="icon-key"></i>
+                        </span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="RUT" [(ngModel)]="rut">
+                </div>
+                <div class="form-row mb-3">
+                    <div class="input-group col">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="icon-user"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Nombre" [(ngModel)]="firstName">
+                    </div>
+                    <div class="input-group col">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="icon-user"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Apellido" [(ngModel)]="lastName">
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">@</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Correo Electrónico" [(ngModel)]="email">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="createUser(rut, firstName, lastName, email)">Crear
+            Cuenta
+        </button>
+    </div>
+    <div class="alert alert-danger" role="alert" *ngIf="alert">
+        {{textAlert}}
+    </div>
+</ng-template>

@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col">
+        <label for="inputState">Rol</label>
+        <select id="inputState" class="form-control" [(ngModel)]="type" (change)="setType(type)">
+            <option value="padrino" selected>Padrino o Madrina</option>
+            <option value="ahijado">Ahijado o Ahijada</option>
+        </select>
+    </div>
+    <div class="col">
+        <label for="inputState">Año</label>
+        <select id="inputState" class="form-control" [(ngModel)]="year" (change)="setYear(year)">
+            <option value="2017">2017</option>
+            <option value="2018" selected>2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+            <option value="2027">2027</option>
+            <option value="2028">2028</option>
+            <option value="2029">2029</option>
+        </select>
+    </div>
+</div>
+
+
+<table class="table table-striped my-5">
+    <thead>
+        <tr>
+            <th scope="col">Rut</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Encargado/a</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of usersList">
+            <th scope="row">{{user.rut}}</th>
+            <td>{{user.firstName}} {{user.lastName}}</td>
+            <td>3</td>
+            <td>
+                <button type="button" class="btn btn-outline btn-success" data-toggle="tooltip" data-placement="top"
+                    title="Ver Información" (click)="openDetailsUser(user.uid)">
+                    <i class="fa fa-edit fa-lg"></i>
+                </button>
+                <button type="button" class="btn btn-outline btn-danger mx-1" data-toggle="tooltip" data-placement="top"
+                    title="Ver Perfil Ahijado/a" (click)="openHistoryUser(user.id)" *ngIf="user.fueAhijado == true">
+                    <i class="fa fa-user fa-lg"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

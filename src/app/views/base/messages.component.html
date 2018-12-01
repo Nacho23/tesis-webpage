@@ -1,0 +1,16 @@
+<div class="card" *ngFor="let message of messageList">
+    <div class="card-header">
+        <i class="fa fa-envelpe fa-lg"></i>
+        <!--<span class="badge badge-success float-right" *ngIf="alertDetails.status == 'resolved'">Resuelto</span>
+        <span class="badge badge-danger float-right" *ngIf="alertDetails.status == 'pending'">Pendiente</span>-->
+    </div>
+    <div class="card-body">
+        <p class="float-right">Generada: {{message.date}} a las: {{message.time}}</p>
+        <h5 class="card-title">ASUNTO: {{message.subject}}</h5>
+
+        <h6>Enviado por: {{message.senderName}}</h6>
+
+        <p class="card-text">DESCRIPCIÓN: {{message.message}}</p>
+
+    </div>
+</div>

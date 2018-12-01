@@ -1,0 +1,279 @@
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <img src="{{profilePicture}}" class="img-avatar" style="width: 150px">
+        </div>
+        <div class="col-9">
+            <h5 style="margin-bottom: 20px; margin-top: 20px;">Nombre y Apellido: {{userProfile.firstName}}
+                {{userProfile.lastName}}</h5>
+            <div class="row">
+                <div class="col-4">
+                    <p>Teléfono:
+                        <a href="tel:+{{userProfile.phone}}">{{userProfile.phone}}</a>
+                    </p>
+                </div>
+                <div class="col-8">
+                    <p>Correo Electrónico:
+                        <a href="mailto:{{userProfile.email}}">{{userProfile.email}}</a>
+                    </p>
+                </div>
+            </div>
+            <div class="row" *ngIf="userProfile.nameGodfather != null">
+                <div class="col-12">
+                    <p>Padrino (madrina):
+                        <a href="#/base/details-user/{{userProfile.godfatherId}}">{{userProfile.nameGodfather}}</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+
+<ngb-tabset>
+    <ngb-tab title="Perfil">
+        <ng-template ngbTabContent>
+            <div class="panel-content">
+                <div class="card text-center bg-light">
+                    <div class="card-body">
+                        <form>
+                            <!-- Input Name -->
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label text-right" for="firstName">Nombre</label>
+                                <div class="input-group col-sm-6">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                    </div>
+                                    <input id="firstName" name="firstName" type="text" placeholder="Nombre" [(ngModel)]="userProfile.firstName"
+                                        class="form-control input-md" (change)="changeFirstName(userProfile.firstName)">
+                                </div>
+                            </div>
+
+                            <!-- Input Name -->
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label text-right" for="lastName">Apellido</label>
+                                <div class="input-group col-sm-6">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                    </div>
+                                    <input id="lastName" name="lastName" type="text" placeholder="Apellido" [(ngModel)]="userProfile.lastName"
+                                        class="form-control input-md" (change)="changeLastName(userProfile.lastName)">
+                                </div>
+                            </div>
+
+                            <!-- File Input Image Profile -->
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label text-right" for="profilePicture">Cargar foto de
+                                    Perfil</label>
+                                <div class="col-sm-6">
+                                    <input id="profilePicture" name="profilePicture" class="input-file" type="file">
+                                </div>
+                            </div>
+
+                            <!-- Input BirthDate -->
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label text-right" for="birthDate">Fecha de Nacimiento</label>
+                                <div class="input-group col-sm-6">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-birthday-cake"></i>
+                                        </div>
+                                    </div>
+                                    <input id="birthDate" name="birthDate" type="date" placeholder="Fecha de Nacimiento"
+                                        [(ngModel)]="userProfile.birthDate" class="form-control input-md" (change)="changeBirthDate(userProfile.birthDate)">
+                                </div>
+                            </div>
+
+                            <!-- Input Email -->
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label text-right" for="email">Correo Electrónico</label>
+                                <div class="input-group col-sm-6">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-envelope" style="font-size: 14px;"></i>
+                                        </div>
+                                    </div>
+                                    <input readonly id="email" name="email" type="email" placeholder="Correo Electrónico"
+                                        [(ngModel)]="userProfile.email" class="form-control input-md">
+                                </div>
+                            </div>
+
+                            <!-- Input Phone -->
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label text-right" for="phone">Teléfono</label>
+                                <div class="input-group col-sm-6">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-phone" style="font-size: 14px;"></i>
+                                        </div>
+                                    </div>
+                                    <input id="phone" name="phone" type="tel" placeholder="Teléfono" [(ngModel)]="userProfile.phone"
+                                        class="form-control input-md" (change)="changePhone(userProfile.phone)">
+                                </div>
+                            </div>
+
+                            <!-- Input Rut -->
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label text-right" for="rut">Rut</label>
+                                <div class="input-group col-sm-6">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-id-card" style="font-size: 14px;"></i>
+                                        </div>
+                                    </div>
+                                    <input id="rut" name="rut" type="text" placeholder="rut" [(ngModel)]="userProfile.rut"
+                                        class="form-control input-md" (change)="changeRut(userProfile.rut)">
+                                </div>
+                            </div>
+
+                            <!-- Input Godfather -->
+                            <div class="form-group row" *ngIf="userProfile.type == 'ahijado'">
+                                <label class="col-sm-4 col-form-label text-right" for="godfather">Padrino (Madrina)</label>
+                                <div class="input-group col-sm-6">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-user" style="font-size: 14px;"></i>
+                                        </div>
+                                    </div>
+                                    <select class="form-control" [(ngModel)]="godfather" [ngModelOptions]="{standalone: true}"
+                                        (change)="changeGodfather(godfather)">
+                                        <option value='0'>Asignar Padrino o Madrina</option>
+                                        <option value="{{godfather.uid}}" *ngFor="let godfather of godfathersList">{{godfather.firstName}}
+                                            {{godfather.lastName}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab>
+        <ng-template ngbTabTitle>
+            Historias
+        </ng-template>
+        <ng-template ngbTabContent>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <select class="form-control" [(ngModel)]="category" (change)="changeCategory(category)">
+                        <option value='0'>Selecciona Categoría</option>
+                        <option value="{{category}}" *ngFor="let category of categoryList">{{category}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Número de Historias: {{countHistories}}</label>
+                </div>
+                <div class="form-group col-md-4">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="checked" (change)="viewDetails(checked)">
+                    <label class="form-check-label">
+                        Ver Detalle Historias
+                    </label>
+                </div>
+            </div>
+            <div class="row" *ngIf="viewDetail">
+                <div class="col-md-12">
+                    <div class="card bg-light" *ngFor="let history of historyList">
+                        <div class="card-body">
+                            <div class="message">
+                                <div>
+                                    <small class="text-muted">{{history.category}}</small>
+                                    <small class="text-muted float-right mt-1">{{history.date}} {{history.time}}</small>
+                                </div>
+                                <div class="text-truncate font-weight-bold">{{history.title}}</div>
+                                <small class="text-muted">{{history.body}}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Resumen Categorías Historias
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-wrapper">
+                                <canvas baseChart class="chart" [datasets]="radarChartData" [labels]="radarChartLabels"
+                                    [options]="radarChartOptions" [chartType]="radarChartType" (chartHover)="chartHovered($event)"
+                                    (chartClick)="chartClicked($event)"></canvas>
+                                <!--<canvas id="HistoryChart"></canvas>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab>
+        <ng-template ngbTabTitle>
+            Estadísticas
+        </ng-template>
+        <ng-template ngbTabContent>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="inputQuestions">Pregunta</label>
+                    <select id="inputQuestions" class="form-control" [(ngModel)]="question" (change)="changeQuestion(question)">
+                        <option value='0'>Selecciona Pregunta</option>
+                        <option value="{{question.uid}}" *ngFor="let question of questionList">{{question.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputQuestions">Desde</label>
+                    <input type="date" class="form-control" [(ngModel)]="dateFrom">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputQuestions">Hasta</label>
+                    <input type="date" class="form-control" [(ngModel)]="dateTo">
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <h5>Detalle de Consulta</h5>
+                    Número de Respuestas: {{countAnswer}}
+                </div>
+            </div>
+            <hr>
+            <div class="row" *ngIf="showAnswer">
+                <div class="col-md-12">
+                    <div class="card" *ngFor="let answer of answerList">
+                        <div class="card-header">
+                            <p class="float-right">Fecha: {{answer.date}}</p>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">{{answer.answer}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="showChart">
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <div class="chart-wrapper">
+                            <!--<canvas baseChart class="chart" [datasets]="lineChartData" [labels]="lineChartLabels"
+                                [options]="lineChartOptions" [colors]="lineChartColours" [legend]="lineChartLegend"
+                                [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>-->
+                            <canvas id="AnswersChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <div class="chart-wrapper">
+                            <!--<canvas baseChart class="chart" [datasets]="lineChartData" [labels]="lineChartLabels"
+                                [options]="lineChartOptions" [colors]="lineChartColours" [legend]="lineChartLegend"
+                                [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>-->
+                            <canvas id="AnswersChart2"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>

@@ -1,0 +1,46 @@
+<div class="align-items-left">
+    <div class="col-6 col-sm-4 col-md mb-3 mb-xl-0 text-left">
+        <div class="btn-group" dropdown>
+            <button type="button" class="btn btn-primary" (click)="addNotice()">
+                <i class="icon-bell"></i>&nbsp;Agregar Aviso
+                <span class="caret"></span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<!-- Notice -->
+<div id="{{notice.uid}}" class="card" *ngFor="let notice of noticesList">
+    <div class="card-body">
+        <button type="button" class="close" aria-label="Close" (click)="deleteNotice(notice.uid)">
+            <span aria-hidden="true text-right">&times;</span>
+        </button>
+        <div class="form-group row">
+            <div class="input-group col-sm-6">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="icon-bell"></i>
+                    </div>
+                </div>
+                <input type="text" placeholder="Pregunta Aquí" class="form-control input-md" [(ngModel)]="notice.text" (blur)="changeText(notice.uid, notice.text)">
+            </div>
+            <div class="col-sm-3">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary" (click)="changeStatus(notice.uid, 'active')">Activo</button>
+                    <button type="button" class="btn btn-danger" (click)="changeStatus(notice.uid, 'inactive')">Inactivo</button>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <i class="fa fa-check" style="font-size: 35px; color: rgb(19, 167, 63);" *ngIf="notice.status == 'active'"></i>
+                <i class="fa fa-close" style="font-size: 35px; color: rgb(167, 19, 19);" *ngIf="notice.status == 'inactive'"></i>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="input-group col-sm-3">
+                <input type="date" class="form-control input-md" [(ngModel)]="notice.date" (change)="changeDate(notice.uid, notice.date)">
+            </div>
+        </div>
+    </div>
+</div>

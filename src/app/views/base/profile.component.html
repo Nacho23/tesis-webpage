@@ -1,0 +1,156 @@
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <img src="{{profilePicture}}" class="img-avatar" style="width: 150px">
+        </div>
+        <div class="col-9">
+            <h5 style="margin-bottom: 20px; margin-top: 20px;">Nombre y Apellido: {{currentProfile.firstName}} {{currentProfile.lastName}}</h5>
+            <div class="row">
+                <div class="col-4">
+                    <p>Teléfono:
+                        <a href="tel:+{{currentProfile.phone}}">{{currentProfile.phone}}</a>
+                    </p>
+                </div>
+                <div class="col-8">
+                    <p>Correo Electrónico:
+                        <a href="mailto:{{currentProfile.email}}">{{currentProfile.email}}</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+
+<ngb-tabset>
+    <ngb-tab title="Perfil">
+        <ng-template ngbTabContent>
+            <div class="panel-content">
+                <div class="card text-center bg-light">
+                    <div class="card-body">
+                        <form>
+                            <!-- Input Name -->
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label text-right" for="firstName">Nombre</label>
+                                <div class="input-group col-sm-6">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                    </div>
+                                    <input id="firstName" name="firstName" type="text" placeholder="Nombre" [(ngModel)]="currentProfile.firstName" class="form-control input-md"
+                                        (change)="changeFirstName(currentProfile.firstName)">
+                                </div>
+                            </div>
+
+                            <!-- Input Name -->
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label text-right" for="lastName">Apellido</label>
+                                <div class="input-group col-sm-6">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                    </div>
+                                    <input id="lastName" name="lastName" type="text" placeholder="Apellido" [(ngModel)]="currentProfile.lastName" class="form-control input-md"
+                                        (change)="changeLastName(currentProfile.lastName)">
+                                </div>
+                            </div>
+
+                            <!-- File Input Image Profile -->
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label text-right" for="profilePicture">Cargar foto de Perfil</label>
+                                <div class="col-sm-6">
+                                    <input id="profilePicture" name="profilePicture" class="input-file" type="file">
+                                </div>
+                            </div>
+
+                            <!-- Input BirthDate -->
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label text-right" for="birthDate">Fecha de Nacimiento</label>
+                                <div class="input-group col-sm-6">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-birthday-cake"></i>
+                                        </div>
+                                    </div>
+                                    <input id="birthDate" name="birthDate" type="date" placeholder="Fecha de Nacimiento" [(ngModel)]="currentProfile.birthDate"
+                                        class="form-control input-md" (change)="changeBirthDate(currentProfile.birthDate)">
+                                </div>
+                            </div>
+
+                            <!-- Input Email -->
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label text-right" for="email">Correo Electrónico</label>
+                                <div class="input-group col-sm-6">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-envelope" style="font-size: 14px;"></i>
+                                        </div>
+                                    </div>
+                                    <input id="email" name="email" type="email" placeholder="Correo Electrónico" [(ngModel)]="currentProfile.email" class="form-control input-md"
+                                        (change)="changeEmail(currentProfile.email)">
+                                </div>
+                            </div>
+
+                            <!-- Input Phone -->
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label text-right" for="phone">Teléfono</label>
+                                <div class="input-group col-sm-6">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-phone" style="font-size: 14px;"></i>
+                                        </div>
+                                    </div>
+                                    <input id="phone" name="phone" type="tel" placeholder="Teléfono" [(ngModel)]="currentProfile.phone" class="form-control input-md"
+                                        (change)="changePhone(currentProfile.phone)">
+                                </div>
+                            </div>
+
+                            <!-- Input Rut -->
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label text-right" for="rut">Rut</label>
+                                <div class="input-group col-sm-6">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-id-card" style="font-size: 14px;"></i>
+                                        </div>
+                                    </div>
+                                    <input id="rut" name="rut" type="text" placeholder="rut" [(ngModel)]="currentProfile.rut" class="form-control input-md" (change)="changeRut(currentUser.rut)">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab>
+        <ng-template ngbTabTitle>
+            Mensajes</ng-template>
+        <ng-template ngbTabContent>
+            <div class="message">
+                <div class="py-3 pb-5 mr-3 float-left">
+                    <div class="avatar">
+                        <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                    </div>
+                </div>
+                <div>
+                    <small class="text-muted">Lukasz Holeczek</small>
+                    <small class="text-muted float-right mt-1">1:52 PM</small>
+                </div>
+                <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+                <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
+                <hr>
+            </div>
+            <div class="message">
+                <div>
+                    <small class="text-muted">Lukasz Holeczek</small>
+                    <small class="text-muted float-right mt-1">1:52 PM</small>
+                </div>
+                <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+                <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
+            </div>
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>

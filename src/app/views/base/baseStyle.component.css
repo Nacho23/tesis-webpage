@@ -1,0 +1,14 @@
+p a {
+    color: rgb(0, 110, 255);
+}
+
+p a:hover {
+    color: rgb(0, 110, 255);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+tbody tr {
+    cursor: pointer;
+}
+

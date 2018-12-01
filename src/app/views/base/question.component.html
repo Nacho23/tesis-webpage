@@ -1,0 +1,476 @@
+<div class="align-items-left">
+    <div class="col-6 col-sm-4 col-md mb-3 mb-xl-0 text-left">
+        <div class="btn-group" dropdown>
+            <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+                <i class="icon-question"></i>&nbsp;Agregar Pregunta
+                <span class="caret"></span>
+            </button>
+            <!-- Los tipos de pregunta pueden ser:
+                - short: Respuesta corta
+                - long: Respuesta larga (parrafo)
+                - multiple: Opcion multiple (solo 1)
+                - box: Casilla de verificacion (1 o mas)
+                - list: Lista desplegable (combobox)
+            -->
+            <ul *dropdownMenu class="dropdown-menu" role="menu">
+                <li role="menuitem" style="cursor: pointer">
+                    <a class="dropdown-item" (click)="addQuestion('short')">
+                        <i class="icon-question"></i>&nbsp;Respuesta Breve</a>
+                </li>
+                <li role="menuitem" style="cursor: pointer">
+                    <a class="dropdown-item" (click)="addQuestion('long')">
+                        <i class="icon-question"></i>&nbsp;Párrafo</a>
+                </li>
+                <li class="divider dropdown-divider"></li>
+                <li role="menuitem" style="cursor: pointer">
+                    <a class="dropdown-item" (click)="addQuestion('multiple')">
+                        <i class="fa fa-dot-circle-o"></i>&nbsp;Opcion Múltiple</a>
+                </li>
+                <li role="menuitem" style="cursor: pointer">
+                    <a class="dropdown-item" (click)="addQuestion('box')">
+                        <i class="fa fa-check-square"></i>&nbsp;Casillas de verificación</a>
+                </li>
+                <li role="menuitem" style="cursor: pointer">
+                    <a class="dropdown-item" (click)="addQuestion('list')">
+                        <i class="fa fa-chevron-circle-down"></i>&nbsp;Lista Desplegable</a>
+                </li>
+                <li class="divider dropdown-divider"></li>
+                <li role="menuitem" style="cursor: pointer">
+                    <a class="dropdown-item" (click)="addQuestion('scale')">
+                        <i class="icon-question"></i>&nbsp;Escala Lineal</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<!-- PREGUNTA PARRAFO CORTO -->
+<div id="{{shortQuestion.uid}}" class="card" *ngFor="let shortQuestion of shortList">
+    <div class="card-body" *ngIf="shortQuestion.status != 'false'">
+        <button type="button" class="close" aria-label="Close" (click)="deleteQuestion(shortQuestion.uid)">
+            <span aria-hidden="true text-right">&times;</span>
+        </button>
+        <h5 class="card-title">Respuesta Breve</h5>
+        <div class="form-group row">
+            <div class="input-group col-sm-6">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="icon-question"></i>
+                    </div>
+                </div>
+                <input type="text" placeholder="Pregunta Aquí" class="form-control input-md" [(ngModel)]="shortQuestion.title"
+                    (blur)="changeTitle(shortQuestion.uid, shortQuestion.title)">
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-1">
+                <div class="input-group">
+                    <button type="button" class="btn btn-primary btn-pill" (click)="addDate(shortQuestion.uid)">
+                        <i class="fa fa-calendar"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="form-group row col-md-11">
+                <div class="mx-1 my-1" *ngFor="let date of shortQuestion.dates">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="cursor: pointer" (click)="deleteDate(shortQuestion.uid, date.uid);"><i
+                                    class="fa fa-trash"></i></span>
+                        </div>
+                        <input class="form-control" type="date" id="example-datetime-local-input" [(ngModel)]="date.date"
+                            (blur)="changeDate(shortQuestion.uid, date.uid, date.date)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PREGUNTA PARRAFO LARGO -->
+<div class="card" *ngFor="let longQuestion of longList">
+    <div class="card-body" *ngIf="longQuestion.status != 'false'">
+        <button type="button" class="close" aria-label="Close" (click)="deleteQuestion(longQuestion.uid)">
+            <span aria-hidden="true text-right">&times;</span>
+        </button>
+        <h5 class="card-title">Párrafo</h5>
+        <div class="form-group row">
+            <div class="input-group col-sm-6">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="icon-question"></i>
+                    </div>
+                </div>
+                <input type="text" placeholder="Pregunta Aquí" class="form-control input-md" [(ngModel)]="longQuestion.title"
+                    (blur)="changeTitle(longQuestion.uid, longQuestion.title)">
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-1">
+                <div class="input-group">
+                    <button type="button" class="btn btn-primary btn-pill" (click)="addDate(longQuestion.uid)">
+                        <i class="fa fa-calendar"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="form-group row col-md-11">
+                <div class="mx-1 my-1" *ngFor="let date of longQuestion.dates">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="cursor: pointer" (click)="deleteDate(longQuestion.uid, date.uid);"><i
+                                    class="fa fa-trash"></i></span>
+                        </div>
+                        <input class="form-control" type="date" id="example-datetime-local-input" [(ngModel)]="date.date"
+                            (blur)="changeDate(longQuestion.uid, date.uid, date.date)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- PREGUNTA SELECCION MULTIPLE -->
+<div class="card" *ngFor="let multipleQuestion of multipleList">
+    <div class="card-body" *ngIf="multipleQuestion.status != 'false'">
+        <button type="button" class="close" aria-label="Close" (click)="deleteQuestion(multipleQuestion.uid)">
+            <span aria-hidden="true text-right">&times;</span>
+        </button>
+        <h5 class="card-title">Opción Múltiple</h5>
+        <div class="form-group row">
+            <div class="input-group col-sm-6">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="icon-question"></i>
+                    </div>
+                </div>
+                <input type="text" placeholder="Pregunta Aquí" class="form-control input-md" [(ngModel)]="multipleQuestion.title"
+                    (blur)="changeTitle(multipleQuestion.uid, multipleQuestion.title)">
+            </div>
+            <div class="input-group col-sm-3">
+                <input type="text" placeholder="Opción" class="form-control input-md" [(ngModel)]="multipleQuestion.option">
+            </div>
+            <div class="input-group col-sm-2">
+                <div class="input-group col-sm-2">
+                    <button type="button" class="btn btn-primary" (click)="addOption(multipleQuestion.uid, multipleQuestion.option)">
+                        Agregar Opción
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row" *ngFor="let option of multipleQuestion.options">
+            <div class="input-group col-sm-6">
+                <input readonly type="text" placeholder="Opción" class="form-control input-md" value="{{option}}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="input-group col-sm-6">
+                <button type="button" class="btn btn-danger" (click)="deleteOption(multipleQuestion.uid)" *ngIf="multipleQuestion.options != undefined">
+                    Borrar Opción
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-1">
+                <div class="input-group">
+                    <button type="button" class="btn btn-primary btn-pill" (click)="addDate(multipleQuestion.uid)">
+                        <i class="fa fa-calendar"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="form-group row col-md-11">
+                <div class="mx-1 my-1" *ngFor="let date of multipleQuestion.dates">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="cursor: pointer" (click)="deleteDate(multipleQuestion.uid, date.uid);"><i
+                                    class="fa fa-trash"></i></span>
+                        </div>
+                        <input class="form-control" type="date" id="example-datetime-local-input" [(ngModel)]="date.date"
+                            (blur)="changeDate(multipleQuestion.uid, date.uid, date.date)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PREGUNTA CASILLA DE VERIFICACION -->
+<div class="card" *ngFor="let boxQuestion of boxList">
+    <div class="card-body" *ngIf="boxQuestion.status != 'false'">
+        <button type="button" class="close" aria-label="Close" (click)="deleteQuestion(boxQuestion.uid)">
+            <span aria-hidden="true text-right">&times;</span>
+        </button>
+        <h5 class="card-title">Casilla de Verificación</h5>
+        <div class="form-group row">
+            <div class="input-group col-sm-6">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="icon-question"></i>
+                    </div>
+                </div>
+                <input type="text" placeholder="Pregunta Aquí" class="form-control input-md" [(ngModel)]="boxQuestion.title"
+                    (blur)="changeTitle(boxQuestion.uid, boxQuestion.title)">
+            </div>
+            <div class="input-group col-sm-3">
+                <input type="text" placeholder="Opción" class="form-control input-md" [(ngModel)]="boxQuestion.option">
+            </div>
+            <div class="input-group col-sm-2">
+                <button type="button" class="btn btn-primary" (click)="addOption(boxQuestion.uid, boxQuestion.option)">
+                    Agregar Opción
+                </button>
+            </div>
+        </div>
+        <div class="form-group row" *ngFor="let option of boxQuestion.options">
+            <div class="input-group col-sm-6">
+                <input readonly type="text" placeholder="Opción" class="form-control input-md" value="{{option}}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="input-group col-sm-6">
+                <button type="button" class="btn btn-danger" (click)="deleteOption(boxQuestion.uid)" *ngIf="boxQuestion.options != undefined">
+                    Borrar Opción
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-1">
+                <div class="input-group">
+                    <button type="button" class="btn btn-primary btn-pill" (click)="addDate(boxQuestion.uid)">
+                        <i class="fa fa-calendar"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="form-group row col-md-11">
+                <div class="mx-1 my-1" *ngFor="let date of boxQuestion.dates">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="cursor: pointer" (click)="deleteDate(boxQuestion.uid, date.uid);"><i
+                                    class="fa fa-trash"></i></span>
+                        </div>
+                        <input class="form-control" type="date" id="example-datetime-local-input" [(ngModel)]="date.date"
+                            (blur)="changeDate(boxQuestion.uid, date.uid, date.date)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- PREGUNTA LISTA DESPLEGABLE -->
+<div class="card" *ngFor="let listQuestion of listList">
+    <div class="card-body" *ngIf="listQuestion.status != 'false'">
+        <button type="button" class="close" aria-label="Close" (click)="deleteQuestion(listQuestion.uid)">
+            <span aria-hidden="true text-right">&times;</span>
+        </button>
+        <h5 class="card-title">Lista Desplegable</h5>
+        <div class="form-group row">
+            <div class="input-group col-sm-6">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="icon-question"></i>
+                    </div>
+                </div>
+                <input type="text" placeholder="Pregunta Aquí" class="form-control input-md" [(ngModel)]="listQuestion.title"
+                    (blur)="changeTitle(listQuestion.uid, listQuestion.title)">
+            </div>
+            <div class="input-group col-sm-3">
+                <input type="text" placeholder="Opción" class="form-control input-md" [(ngModel)]="listQuestion.option">
+            </div>
+            <div class="input-group col-sm-2">
+                <div class="input-group col-sm-2">
+                    <button type="button" class="btn btn-primary" (click)="addOption(listQuestion.uid, listQuestion.option)">
+                        Agregar Opción
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row" *ngFor="let option of listQuestion.options">
+            <div class="input-group col-sm-6">
+                <input readonly type="text" placeholder="Opción" class="form-control input-md" value="{{option}}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="input-group col-sm-6">
+                <button type="button" class="btn btn-danger" (click)="deleteOption(listQuestion.uid)" *ngIf="listQuestion.options != undefined">
+                    Borrar Opción
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-1">
+                <div class="input-group">
+                    <button type="button" class="btn btn-primary btn-pill" (click)="addDate(listQuestion.uid)">
+                        <i class="fa fa-calendar"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="form-group row col-md-11">
+                <div class="mx-1 my-1" *ngFor="let date of listQuestion.dates">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="cursor: pointer" (click)="deleteDate(listQuestion.uid, date.uid);"><i
+                                    class="fa fa-trash"></i></span>
+                        </div>
+                        <input class="form-control" type="date" id="example-datetime-local-input" [(ngModel)]="date.date"
+                            (blur)="changeDate(listQuestion.uid, date.uid, date.date)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- PREGUNTA ESCALA (del 1 al X) -->
+<div class="card" *ngFor="let scaleQuestion of scaleList">
+    <div class="card-body" *ngIf="scaleQuestion.status != 'false'">
+        <button type="button" class="close" aria-label="Close" (click)="deleteQuestion(scaleQuestion.uid)">
+            <span aria-hidden="true text-right">&times;</span>
+        </button>
+        <h5 class="card-title">Escala Lineal</h5>
+        <div class="form-group row">
+            <div class="input-group col-sm-6">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="icon-question"></i>
+                    </div>
+                </div>
+                <input type="text" placeholder="Pregunta Aquí" class="form-control input-md" [(ngModel)]="scaleQuestion.title"
+                    (blur)="changeTitle(scaleQuestion.uid, scaleQuestion.title)">
+            </div>
+            <div class="input-group col-sm-3">
+                <input type="text" placeholder="Etiqueta (opc)" class="form-control input-md" [(ngModel)]="scaleQuestion.labelMin"
+                    (blur)="changeLabelMin(scaleQuestion.uid, scaleQuestion.labelMin)">
+                <div class="btn-group" dropdown>
+                    <!--<select class="btn btn-primary dropdown-toggle" [(ngModel)]='scaleQuestion.optionSelected' (ngModelChange)='changeMin(scaleQuestion.uid, $event)'>
+                        <option *ngFor="let option of scaleQuestionsOptions" [value]="option">{{option}}</option>
+                    </select>-->
+                    <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+                        <label *ngIf="scaleQuestion.min != undefined">{{scaleQuestion.min}}</label>
+                        <label *ngIf="scaleQuestion.min == undefined">Min.</label>
+                        <span class="caret"></span>
+                    </button>
+                    <ul *dropdownMenu class="dropdown-menu" role="menu">
+                        <li role="menuitem">
+                            <a class="dropdown-item" (click)="changeMin(scaleQuestion.uid, 1)">1</a>
+                        </li>
+                        <li role="menuitem">
+                            <a class="dropdown-item" (click)="changeMin(scaleQuestion.uid, 2)">2</a>
+                        </li>
+                        <li role="menuitem">
+                            <a class="dropdown-item" (click)="changeMin(scaleQuestion.uid, 3)">3</a>
+                        </li>
+                        <li role="menuitem">
+                            <a class="dropdown-item" (click)="changeMin(scaleQuestion.uid, 4)">4</a>
+                        </li>
+                        <li role="menuitem">
+                            <a class="dropdown-item" (click)="changeMin(scaleQuestion.uid, 5)">5</a>
+                        </li>
+                        <li role="menuitem">
+                            <a class="dropdown-item" (click)="changeMin(scaleQuestion.uid, 6)">6</a>
+                        </li>
+                        <li role="menuitem">
+                            <a class="dropdown-item" (click)="changeMin(scaleQuestion.uid, 7)">7</a>
+                        </li>
+                        <li role="menuitem">
+                            <a class="dropdown-item" (click)="changeMin(scaleQuestion.uid, 8)">8</a>
+                        </li>
+                        <li role="menuitem">
+                            <a class="dropdown-item" (click)="changeMin(scaleQuestion.uid, 9)">9</a>
+                        </li>
+                        <li role="menuitem">
+                            <a class="dropdown-item" (click)="changeMin(scaleQuestion.uid, 10)">10</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="input-group col-sm-3">
+                <input type="text" placeholder="Etiqueta (opc)" class="form-control input-md" [(ngModel)]="scaleQuestion.labelMax"
+                    (blur)="changeLabelMax(scaleQuestion.uid, scaleQuestion.labelMax)">
+                <div class="btn-group" dropdown>
+                    <!--<select class="btn btn-primary dropdown-toggle" [(ngModel)]='scaleQuestion.optionSelected' (ngModelChange)='changeMax(scaleQuestion.uid, $event)'>                        
+                        <option class="" *ngFor="let option of scaleQuestionsOptions" [value]="option">{{option}}</option>
+                    </select>-->
+                    <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+                        <label *ngIf="scaleQuestion.max != undefined">{{scaleQuestion.max}}</label>
+                        <label *ngIf="scaleQuestion.max == undefined">Máx.</label>
+                        <span class="caret"></span>
+                    </button>
+                    <ul *dropdownMenu class="dropdown-menu" role="menu">
+                        <li role="menuitem">
+                            <a class="dropdown-item" (click)="changeMax(scaleQuestion.uid, 1)">1</a>
+                        </li>
+                        <li role="menuitem">
+                            <a class="dropdown-item" (click)="changeMax(scaleQuestion.uid, 2)">2</a>
+                        </li>
+                        <li role="menuitem">
+                            <a class="dropdown-item" (click)="changeMax(scaleQuestion.uid, 3)">3</a>
+                        </li>
+                        <li role="menuitem">
+                            <a class="dropdown-item" (click)="changeMax(scaleQuestion.uid, 4)">4</a>
+                        </li>
+                        <li role="menuitem">
+                            <a class="dropdown-item" (click)="changeMax(scaleQuestion.uid, 5)">5</a>
+                        </li>
+                        <li role="menuitem">
+                            <a class="dropdown-item" (click)="changeMax(scaleQuestion.uid, 6)">6</a>
+                        </li>
+                        <li role="menuitem">
+                            <a class="dropdown-item" (click)="changeMax(scaleQuestion.uid, 7)">7</a>
+                        </li>
+                        <li role="menuitem">
+                            <a class="dropdown-item" (click)="changeMax(scaleQuestion.uid, 8)">8</a>
+                        </li>
+                        <li role="menuitem">
+                            <a class="dropdown-item" (click)="changeMax(scaleQuestion.uid, 9)">9</a>
+                        </li>
+                        <li role="menuitem">
+                            <a class="dropdown-item" (click)="changeMax(scaleQuestion.uid, 10)">10</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-1">
+                <div class="input-group">
+                    <button type="button" class="btn btn-primary btn-pill" (click)="addDate(scaleQuestion.uid)">
+                        <i class="fa fa-calendar"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="form-group row col-md-11">
+                <div class="mx-1 my-1" *ngFor="let date of scaleQuestion.dates">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="cursor: pointer" (click)="deleteDate(scaleQuestion.uid, date.uid);"><i
+                                    class="fa fa-trash"></i></span>
+                        </div>
+                        <input class="form-control" type="date" id="example-datetime-local-input" [(ngModel)]="date.date"
+                            (blur)="changeDate(scaleQuestion.uid, date.uid, date.date)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

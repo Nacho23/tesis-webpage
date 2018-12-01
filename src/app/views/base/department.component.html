@@ -1,0 +1,107 @@
+<div class="alert alert-success" role="alert" *ngIf="alert == success">
+    {{textAlert}}
+</div>
+
+<div class="alert alert-success" role="alert" *ngIf="alert == error">
+    {{textAlert}}
+</div>
+
+
+<div class="align-items-left">
+    <div class="col-6 col-sm-4 col-md mb-3 mb-xl-0 text-left">
+        <button type="button" class="btn btn-primary my-2" data-toggle="modal" (click)="openModalDepartments(modalCreateDepartment)">
+            <i class="fa fa-user"></i>&nbsp;Agregar Nueva Unidad</button>
+        <img src="../../../assets/img/brand/loader.gif" style="width: 30px" *ngIf="loading">
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Código</th>
+            <th scope="col">Nombre Departamento</th>
+            <th scope="col">Encargado/a</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let department of departmentList">
+            <th scope="row">{{department.code}}</th>
+            <td>{{department.nameDepartment}}</td>
+            <td>{{department.nameSubadministrator}}</td>
+            <td>
+                <button type="button" class="btn btn-outline btn-success" data-toggle="tooltip" data-placement="top"
+                    title="Editar Departamento" (click)="openModalWithParams(modalCreateDepartment, department.uid)">
+                    <i class="fa fa-edit fa-lg"></i>
+                </button>
+                <button type="button" class="btn btn-outline btn-danger mx-1" data-toggle="tooltip" data-placement="top"
+                    title="Eliminar Departamento" (click)="removeDepartment(department.uid)">
+                    <i class="fa fa-remove fa-lg"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+
+
+<ng-template #modalCreateDepartment>
+    <div class="modal-header">
+        <h4 class="modal-title">Agregar Nueva Unidad</h4>
+        <button type="button" class="close" (click)="modalRef.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="card-body p-4">
+                <p class="text-muted">Registrar nuevo unidad</p>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="icon-key"></i>
+                        </span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Código" [(ngModel)]="code">
+                </div>
+                <div class="form-row mb-3">
+                    <div class="input-group col">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-building-o"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Nombre Departamento" [(ngModel)]="nameDepartment">
+                    </div>
+                </div>
+                <div class="form-row mb-3">
+                    <div class="input-group col">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="icon-user"></i>
+                            </span>
+                        </div>
+                        <select class="form-control" [(ngModel)]="subadministrator">
+                            <option value='0'>Encargado Unidad</option>
+                            <option value="{{subadministrator.uid}}" *ngFor="let subadministrator of subadministratorList">{{subadministrator.firstName}}
+                                {{subadministrator.lastName}}</option>
+                        </select>
+                        <!--<input type="text" class="form-control" placeholder="Nombre Personas a Cargo" [(ngModel)]="firstName">-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="createDepartment(code, nameDepartment, subadministrator)">
+            {{btnAction}}
+        </button>
+    </div>
+    <div class="alert alert-danger" role="alert" *ngIf="alertModal">
+        {{textAlertModal}}
+    </div>
+</ng-template>
+
