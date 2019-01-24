@@ -14,6 +14,8 @@ import { XlsxToJsonService } from '../../services/xlsx-to-json/xlsx-to-json.serv
 export class GodFathersComponent {
   public currentUser: any;
 
+  public arrayEmpty: boolean = false;
+
   public godfatherList: Array<any> = [];
   public modalRef: BsModalRef;
 
@@ -65,6 +67,9 @@ export class GodFathersComponent {
       }
       return false;
     })
+    if(this.godfatherList.length == 0) {
+      this.arrayEmpty = true;
+    }
   }
 
   goToUserDetails(id) {
@@ -120,7 +125,7 @@ export class GodFathersComponent {
     let date = new Date();
     let year = date.getFullYear().toString();
     let fueAhijado = false;
-    let department = this.currentUser.department
+    let department = user.departmentUid;
     new Promise(resolve => {
       this.userService.createUser(rut, firstName, lastName, type, email, pass, year, fueAhijado, department);
       this.modalRef.hide();

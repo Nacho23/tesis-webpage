@@ -1,4 +1,4 @@
-# Plataforma de Seguimiento y Levantamiento de Alertas para los estudiantes de Pimer Año de las Escuelas de Pregrado de la Universidad Austral de Chile
+# CoreUI Free Angular 2+ Admin Template [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?text=CoreUI%20-%20Free%20Bootstrap%204%20Admin%20Template%20&url=https://coreui.io&hashtags=bootstrap,admin,template,dashboard,panel,free,angular,react,vue)
 
 Please help us on [Product Hunt](https://www.producthunt.com/posts/coreui-open-source-bootstrap-4-admin-template-with-angular-2-react-js-vue-js-support) and [Designer News](https://www.designernews.co/stories/81127). Thanks in advance!
 
@@ -10,7 +10,7 @@ CoreUI is based on Bootstrap 4 and offers 6 versions: [HTML5 AJAX](https://githu
 
 CoreUI is meant to be the UX game changer. Pure & transparent code is devoid of redundant components, so the app is light enough to offer ultimate user experience. This means mobile devices also, where the navigation is just as easy and intuitive as on a desktop or laptop. The CoreUI Layout API lets you customize your project for almost any device – be it Mobile, Web or WebApp – CoreUI covers them all!
 
-## Tabla de Funciones Principales
+## Table of Contents
 
 * [Versions](#versions)
 * [CoreUI Pro](#coreui-pro)

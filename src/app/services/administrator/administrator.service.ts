@@ -36,6 +36,7 @@ export class AdministratorService {
   }
 
   deleteDepartment(uid: string) {
+    // TO DO modificar por softdelete
     return firebase.database().ref('/department/' + uid).remove();
   }
 

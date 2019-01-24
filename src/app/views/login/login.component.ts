@@ -16,13 +16,13 @@ import { user } from '../../../environments/environment';
 })
 export class LoginComponent {
   public loginForm: FormGroup;
+  public errorMsg: string;
+  public error: boolean = false;
 
   public user = {
     user: '',
     pass: ''
   };
-
-  errorLogin: boolean = false
 
   constructor(private formbuilder: FormBuilder, private authService: AuthService,
     private profileService: ProfileService, private router: Router, private store: AppStorageService) {
@@ -40,6 +40,7 @@ export class LoginComponent {
   }
 
   login() {
+    this.error = false;
     this.user = {
       user: this.loginForm.value.email,
       pass: this.loginForm.value.password
@@ -50,12 +51,11 @@ export class LoginComponent {
         this.store.set(res.user.email, res.user.uid, this.loginForm.value.sesion);
         user.userUid = res.user.uid;
         this.router.navigate(['/dashboard'])
-        this.errorLogin = false;
       }, err => {
         alert(err.message);
-        console.log("Usuario NO registrado");
+        this.errorMsg = 'Usuario no registrado, por favor contacte a su escuela para solucionar el error';
+        this.error = true;
         this.router.navigate(['/']);
-        this.errorLogin = true;
       })
   }
 

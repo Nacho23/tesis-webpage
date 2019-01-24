@@ -1,9 +1,17 @@
+<div class="alert alert-danger" role="alert" *ngIf="arrayEmpty == true">
+    No existen ahijados registrados
+</div>
+
 <div class="row">
     <div class="col-md-3">
         <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openModal(modalCreateUser)">
             <i class="fa fa-user"></i>&nbsp;Agregar Ahijado(a)</button>
     </div>
+    <!--<input style="display: none" hidden type="file" />-->
     <div class="col-md-5">
+        <!--<button type="button" class="">
+            <label style="display: contents"><i className="fa fa-upload"></i> Cargar archivo</label>
+        </button>-->
         <input type="file" class="form-control" (change)="handleFile($event)">
     </div>
     <div class="col-md-3">
@@ -13,7 +21,7 @@
 
 <!-- Tabla de Ahijads/as -->
 
-<div class="my-4">
+<div class="my-4" *ngIf="arrayEmpty == false">
     <table class="table table-hover table-striped">
         <thead>
             <tr>

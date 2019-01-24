@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { Reference } from '@firebase/database-types';
-import { exists } from 'fs';
 
 @Injectable({
   providedIn: 'root'

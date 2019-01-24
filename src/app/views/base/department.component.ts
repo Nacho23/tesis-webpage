@@ -68,7 +68,6 @@ export class DepartmentComponent {
         }
       }
     })
-    this.getSubadministrators();
   }
 
   getSubadministrators() {

@@ -14,6 +14,8 @@ import { XlsxToJsonService } from '../../services/xlsx-to-json/xlsx-to-json.serv
 export class GodSonsComponent {
   public currentUser: any;
 
+  public arrayEmpty: boolean = false;
+
   public godsonList: Array<any> = [];
   public modalRef: BsModalRef;
 
@@ -66,6 +68,9 @@ export class GodSonsComponent {
       }
       return false;
     })
+    if(this.godsonList.length == 0) {
+      this.arrayEmpty = true;
+    }
   }
 
   goToUserDetails(id) {
@@ -76,9 +81,7 @@ export class GodSonsComponent {
     let file = event.target.files[0];
     this.xlsxToJsonService.processFileToJson({}, file).subscribe(data => {
       this.resultFile = data['sheets'].Hoja1;
-      console.log(this.resultFile.length);
       for (let i = 0; i < this.resultFile.length; i++) {
-        console.log(this.resultFile[i]);
         let rut = this.resultFile[i].rut;
         let email = this.resultFile[i].email;
         let firstName = this.resultFile[i].firstName;
@@ -103,7 +106,6 @@ export class GodSonsComponent {
     let year = date.getFullYear().toString();
     let fueAhijado = true;
     let department = user.departmentUid;
-    console.log(department);
     new Promise(resolve => {
       this.userService.createUser(rut, firstName, lastName, type, email, pass, year, fueAhijado, department);
       resolve(this.loading = false);
