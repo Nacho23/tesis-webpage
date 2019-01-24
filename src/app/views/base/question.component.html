@@ -54,13 +54,13 @@
         </button>
         <h5 class="card-title">Respuesta Breve</h5>
         <div class="form-group row">
-            <div class="input-group col-sm-6">
+            <div class="input-group input-group-sm col-sm-6">
                 <div class="input-group-prepend">
                     <div class="input-group-text">
                         <i class="icon-question"></i>
                     </div>
                 </div>
-                <input type="text" placeholder="Pregunta Aquí" class="form-control input-md" [(ngModel)]="shortQuestion.title"
+                <input type="text" placeholder="Pregunta Aquí" class="form-control form-control-sm input-md" [(ngModel)]="shortQuestion.title"
                     (blur)="changeTitle(shortQuestion.uid, shortQuestion.title)">
             </div>
         </div>
@@ -99,13 +99,13 @@
         </button>
         <h5 class="card-title">Párrafo</h5>
         <div class="form-group row">
-            <div class="input-group col-sm-6">
+            <div class="input-group input-group-sm col-sm-6">
                 <div class="input-group-prepend">
                     <div class="input-group-text">
                         <i class="icon-question"></i>
                     </div>
                 </div>
-                <input type="text" placeholder="Pregunta Aquí" class="form-control input-md" [(ngModel)]="longQuestion.title"
+                <input type="text" placeholder="Pregunta Aquí" class="form-control form-control-sm input-md" [(ngModel)]="longQuestion.title"
                     (blur)="changeTitle(longQuestion.uid, longQuestion.title)">
             </div>
         </div>
@@ -144,35 +144,35 @@
             <span aria-hidden="true text-right">&times;</span>
         </button>
         <h5 class="card-title">Opción Múltiple</h5>
-        <div class="form-group row">
+        <div class="form-group input-group-sm row">
             <div class="input-group col-sm-6">
                 <div class="input-group-prepend">
                     <div class="input-group-text">
                         <i class="icon-question"></i>
                     </div>
                 </div>
-                <input type="text" placeholder="Pregunta Aquí" class="form-control input-md" [(ngModel)]="multipleQuestion.title"
+                <input type="text" placeholder="Pregunta Aquí" class="form-control form-control-sm input-md" [(ngModel)]="multipleQuestion.title"
                     (blur)="changeTitle(multipleQuestion.uid, multipleQuestion.title)">
             </div>
             <div class="input-group col-sm-3">
-                <input type="text" placeholder="Opción" class="form-control input-md" [(ngModel)]="multipleQuestion.option">
+                <input type="text" placeholder="Opción" class="form-control form-control-sm input-md" [(ngModel)]="multipleQuestion.option">
             </div>
             <div class="input-group col-sm-2">
                 <div class="input-group col-sm-2">
-                    <button type="button" class="btn btn-primary" (click)="addOption(multipleQuestion.uid, multipleQuestion.option)">
+                    <button type="button" class="btn btn-primary btn-sm" (click)="addOption(multipleQuestion.uid, multipleQuestion.option)">
                         Agregar Opción
                     </button>
                 </div>
             </div>
         </div>
         <div class="form-group row" *ngFor="let option of multipleQuestion.options">
-            <div class="input-group col-sm-6">
-                <input readonly type="text" placeholder="Opción" class="form-control input-md" value="{{option}}">
+            <div class="input-group col-sm-3">
+                <input readonly type="text" placeholder="Opción" class="form-control form-control-sm input-md" value="{{option}}">
             </div>
         </div>
         <div class="form-group row">
             <div class="input-group col-sm-6">
-                <button type="button" class="btn btn-danger" (click)="deleteOption(multipleQuestion.uid)" *ngIf="multipleQuestion.options != undefined">
+                <button type="button" class="btn btn-danger btn-sm" (click)="deleteOption(multipleQuestion.uid)" *ngIf="multipleQuestion.options != undefined">
                     Borrar Opción
                 </button>
             </div>
@@ -195,7 +195,7 @@
                             <span class="input-group-text" style="cursor: pointer" (click)="deleteDate(multipleQuestion.uid, date.uid);"><i
                                     class="fa fa-trash"></i></span>
                         </div>
-                        <input class="form-control" type="date" id="example-datetime-local-input" [(ngModel)]="date.date"
+                        <input class="form-control form-control-sm" type="date" id="example-datetime-local-input" [(ngModel)]="date.date"
                             (blur)="changeDate(multipleQuestion.uid, date.uid, date.date)">
                     </div>
                 </div>
@@ -218,14 +218,14 @@
                         <i class="icon-question"></i>
                     </div>
                 </div>
-                <input type="text" placeholder="Pregunta Aquí" class="form-control input-md" [(ngModel)]="boxQuestion.title"
+                <input type="text" placeholder="Pregunta Aquí" class="form-control form-control-sm input-md" [(ngModel)]="boxQuestion.title"
                     (blur)="changeTitle(boxQuestion.uid, boxQuestion.title)">
             </div>
             <div class="input-group col-sm-3">
-                <input type="text" placeholder="Opción" class="form-control input-md" [(ngModel)]="boxQuestion.option">
+                <input type="text" placeholder="Opción" class="form-control form-control-sm input-md" [(ngModel)]="boxQuestion.option">
             </div>
             <div class="input-group col-sm-2">
-                <button type="button" class="btn btn-primary" (click)="addOption(boxQuestion.uid, boxQuestion.option)">
+                <button type="button" class="btn btn-primary btn-sm" (click)="addOption(boxQuestion.uid, boxQuestion.option)">
                     Agregar Opción
                 </button>
             </div>
@@ -278,13 +278,13 @@
         </button>
         <h5 class="card-title">Lista Desplegable</h5>
         <div class="form-group row">
-            <div class="input-group col-sm-6">
+            <div class="input-group input-group-sm col-sm-6">
                 <div class="input-group-prepend">
                     <div class="input-group-text">
                         <i class="icon-question"></i>
                     </div>
                 </div>
-                <input type="text" placeholder="Pregunta Aquí" class="form-control input-md" [(ngModel)]="listQuestion.title"
+                <input type="text" placeholder="Pregunta Aquí" class="form-control form-control-sm input-md" [(ngModel)]="listQuestion.title"
                     (blur)="changeTitle(listQuestion.uid, listQuestion.title)">
             </div>
             <div class="input-group col-sm-3">
@@ -292,7 +292,7 @@
             </div>
             <div class="input-group col-sm-2">
                 <div class="input-group col-sm-2">
-                    <button type="button" class="btn btn-primary" (click)="addOption(listQuestion.uid, listQuestion.option)">
+                    <button type="button" class="btn btn-primary btn-sm" (click)="addOption(listQuestion.uid, listQuestion.option)">
                         Agregar Opción
                     </button>
                 </div>
@@ -300,12 +300,12 @@
         </div>
         <div class="form-group row" *ngFor="let option of listQuestion.options">
             <div class="input-group col-sm-6">
-                <input readonly type="text" placeholder="Opción" class="form-control input-md" value="{{option}}">
+                <input readonly type="text" placeholder="Opción" class="form-control form-control-sm input-md" value="{{option}}">
             </div>
         </div>
         <div class="form-group row">
             <div class="input-group col-sm-6">
-                <button type="button" class="btn btn-danger" (click)="deleteOption(listQuestion.uid)" *ngIf="listQuestion.options != undefined">
+                <button type="button" class="btn btn-danger btn-sm" (click)="deleteOption(listQuestion.uid)" *ngIf="listQuestion.options != undefined">
                     Borrar Opción
                 </button>
             </div>
@@ -346,23 +346,23 @@
         </button>
         <h5 class="card-title">Escala Lineal</h5>
         <div class="form-group row">
-            <div class="input-group col-sm-6">
+            <div class="input-group input-group-sm col-sm-6">
                 <div class="input-group-prepend">
                     <div class="input-group-text">
                         <i class="icon-question"></i>
                     </div>
                 </div>
-                <input type="text" placeholder="Pregunta Aquí" class="form-control input-md" [(ngModel)]="scaleQuestion.title"
+                <input type="text" placeholder="Pregunta Aquí" class="form-control form-control-sm" [(ngModel)]="scaleQuestion.title"
                     (blur)="changeTitle(scaleQuestion.uid, scaleQuestion.title)">
             </div>
             <div class="input-group col-sm-3">
-                <input type="text" placeholder="Etiqueta (opc)" class="form-control input-md" [(ngModel)]="scaleQuestion.labelMin"
+                <input type="text" placeholder="Etiqueta (opc)" class="form-control form-control-sm" [(ngModel)]="scaleQuestion.labelMin"
                     (blur)="changeLabelMin(scaleQuestion.uid, scaleQuestion.labelMin)">
                 <div class="btn-group" dropdown>
                     <!--<select class="btn btn-primary dropdown-toggle" [(ngModel)]='scaleQuestion.optionSelected' (ngModelChange)='changeMin(scaleQuestion.uid, $event)'>
                         <option *ngFor="let option of scaleQuestionsOptions" [value]="option">{{option}}</option>
                     </select>-->
-                    <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+                    <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle btn-sm">
                         <label *ngIf="scaleQuestion.min != undefined">{{scaleQuestion.min}}</label>
                         <label *ngIf="scaleQuestion.min == undefined">Min.</label>
                         <span class="caret"></span>
@@ -402,13 +402,13 @@
                 </div>
             </div>
             <div class="input-group col-sm-3">
-                <input type="text" placeholder="Etiqueta (opc)" class="form-control input-md" [(ngModel)]="scaleQuestion.labelMax"
+                <input type="text" placeholder="Etiqueta (opc)" class="form-control form-control-sm input-md" [(ngModel)]="scaleQuestion.labelMax"
                     (blur)="changeLabelMax(scaleQuestion.uid, scaleQuestion.labelMax)">
                 <div class="btn-group" dropdown>
                     <!--<select class="btn btn-primary dropdown-toggle" [(ngModel)]='scaleQuestion.optionSelected' (ngModelChange)='changeMax(scaleQuestion.uid, $event)'>                        
                         <option class="" *ngFor="let option of scaleQuestionsOptions" [value]="option">{{option}}</option>
                     </select>-->
-                    <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+                    <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle btn-sm">
                         <label *ngIf="scaleQuestion.max != undefined">{{scaleQuestion.max}}</label>
                         <label *ngIf="scaleQuestion.max == undefined">Máx.</label>
                         <span class="caret"></span>
